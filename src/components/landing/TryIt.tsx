@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Button from "../common/Button";
 
 const TryIt: React.FC = () => {
   return (
@@ -11,9 +12,7 @@ const TryIt: React.FC = () => {
           <p className="inline text-8xl"> </p>
         </span>
         <Link href="/login">
-          <button className="rounded-full border-2 border-textPrimary px-10 py-3 text-2xl text-textPrimary no-underline transition">
-            Try Now {">"}
-          </button>
+          <Button text={"Try Now >"} />
         </Link>
       </div>
     </div>

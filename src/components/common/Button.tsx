@@ -9,7 +9,7 @@ const Button: React.FC<Props> = ({ text }) => {
   return (
     <button
       title={text}
-      className="m-auto mb-8 rounded-xl bg-button py-4 px-8 text-center text-3xl text-white transition-all hover:bg-buttonHover  -sm:text-2xl "
+      className="rounded-full border-2 border-textPrimary px-10 py-3 text-2xl text-textPrimary no-underline transition"
     >
       {text}
     </button>

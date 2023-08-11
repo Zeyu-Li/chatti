@@ -14,7 +14,7 @@ const Why: React.FC = () => {
             className="w-1/2 -lg:w-full -lg:pb-8"
           />
           <div className="flex w-full flex-col items-center justify-center">
-            <h1 className="rounded-full rounded-tl-none border-2 border-textSecondary p-12 text-7xl font-bold">
+            <h1 className="rounded-full border-2 border-textSecondary p-12 text-7xl font-bold lg:rounded-tl-none -lg:rounded-tr-none">
               Well actually
             </h1>
             <h2 className="py-8 text-6xl font-bold text-textSecondary/95">

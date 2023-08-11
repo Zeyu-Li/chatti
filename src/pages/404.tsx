@@ -9,25 +9,35 @@ const Custom404: NextPage = () => {
     <>
       <Title title="PlayDate | Lost in Action" />
       <Header />
-      <main className="backgroundPile flex min-h-screen items-center justify-center bg-primary">
-        <div className="m-auto flex max-w-4xl justify-center p-8 text-4xl -sm:flex-col">
-          <div>
-            <h1 className="my-8 text-7xl font-bold text-secondary -sm:my-4 -sm:text-5xl">
-              Page 404
-            </h1>
-            <h2 className="my-8 text-5xl text-secondary/80 -sm:my-4 -sm:text-3xl">
-              This page must{"'"}ve been stolen by a pirate 🦜
-            </h2>
-            <Link href="/">
-              <Button text={"Take me Home →"} />
-            </Link>
-          </div>
-          <div className="flex h-[40vh] w-[40vh] items-center justify-center">
-            <img
-              src="/common/animation/girl.png"
-              alt="PlayDate avatar"
-              className="h-full"
-            />
+      <main className="flex min-h-screen flex-col items-center justify-center bg-primary">
+        <div className="w-full max-w-6xl  -lg:px-8">
+          <div className="flex h-screen w-full flex-row items-center -lg:flex-col">
+            <div className="flex flex-1 flex-col -lg:pt-32" id="top">
+              <div>
+                <h1 className="text-6xl font-bold -lg:text-6xl">
+                  Looks like you're lost
+                </h1>
+              </div>
+              <div>
+                <h2 className="py-8 text-4xl font-bold text-textPrimary/90">
+                  Come back 🥺
+                </h2>
+              </div>
+              <div>
+                {/* call to action button of try now styled like mailchimp */}
+                {/* popout on hover */}
+                <Link href="/">
+                  <Button text={"Take me Home →"} />
+                </Link>
+              </div>
+            </div>
+            <div className="flex flex-1 justify-end">
+              <img
+                src="/common/image/girl.png"
+                alt="PlayDate avatar"
+                className="h-full"
+              />
+            </div>
           </div>
         </div>
       </main>

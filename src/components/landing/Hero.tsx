@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Button from "../common/Button";
 
 const Hero: React.FC = () => {
   return (
@@ -19,15 +20,13 @@ const Hero: React.FC = () => {
             {/* call to action button of try now styled like mailchimp */}
             {/* popout on hover */}
             <Link href="/login">
-              <button className="rounded-full border-2 border-textPrimary px-10 py-3 text-2xl text-textPrimary no-underline transition">
-                Try Now {">"}
-              </button>
+              <Button text={"Try Now >"} />
             </Link>
           </div>
         </div>
         <div className="flex flex-1 justify-end">
           <img
-            src="/common/animation/girl.png"
+            src="/common/image/girl.png"
             alt="PlayDate avatar"
             className="h-full"
           />

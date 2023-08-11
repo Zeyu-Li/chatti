@@ -7,8 +7,8 @@ body {
 }
 
 .grow-in-text-size {
-  /* font-size: 72px; */
-  transition: font-size 2s ease-in-out;
+  font-size: 72px;
+  animation: font-size 2s ease-in;
 }
 
 @keyframes font-size {
