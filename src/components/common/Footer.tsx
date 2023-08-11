@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
   return (
     <footer
       id="footer"
-      className="w-full bg-textPrimary text-center text-3xl text-textSecondary -sm:text-xl"
+      className="w-full bg-textPrimary text-center text-3xl text-textSecondary -lg:px-8 -sm:text-xl"
     >
       <div className="m-auto flex h-full w-full max-w-6xl flex-row justify-between py-8">
         <p>

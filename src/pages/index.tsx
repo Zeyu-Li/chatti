@@ -4,6 +4,7 @@ import Footer from "~/components/common/Footer";
 import Header from "~/components/common/Header";
 import Hero from "~/components/landing/Hero";
 import Showcase from "~/components/landing/Showcase";
+import TryIt from "~/components/landing/TryIt";
 import Why from "~/components/landing/Why";
 import { api } from "~/utils/api";
 
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <Showcase />
         <Why />
+        <TryIt />
         <Footer />
       </main>
     </>

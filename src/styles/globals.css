@@ -5,3 +5,17 @@
 body {
   scroll-behavior: smooth;
 }
+
+.grow-in-text-size {
+  /* font-size: 72px; */
+  transition: font-size 2s ease-in-out;
+}
+
+@keyframes font-size {
+  0% {
+    font-size: 12px;
+  }
+  100% {
+    font-size: 72px;
+  }
+}
