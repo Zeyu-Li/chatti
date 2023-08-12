@@ -5,6 +5,7 @@ import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import { Open_Sans } from "next/font/google";
 import { Kanit } from "next/font/google";
+import Heading from "~/components/SEO/Heading";
 
 // If loading a variable font, you don't need to specify the font weight
 const open_sans = Open_Sans({ subsets: ["latin"] });
@@ -19,6 +20,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
+      <Heading />
       <span className={kanit.className}>
         <Component {...pageProps} />
       </span>

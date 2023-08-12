@@ -1,27 +1,71 @@
 import { api } from "~/utils/api";
-import { signIn, signOut, useSession } from "next-auth/react";
+import {
+  getProviders,
+  getSession,
+  signIn,
+  signOut,
+  useSession,
+} from "next-auth/react";
+import { type AppProps } from "next/app";
+import Header from "~/components/common/Header";
+import { useRouter } from "next/router";
+import { homeRedirect } from "~/utils/homeRedirect";
 
-export default function AuthShowcase() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
+export default function Login({ providers }: { providers: AppProps }) {
   const { data: sessionData } = useSession();
+  const router = useRouter();
 
-  const { data: secretMessage } = api.example.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
+  if (sessionData) {
+    router.push("/home");
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => void signOut() : () => void signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
+    <>
+      <Header />
+      <main className="flex min-h-screen flex-col items-center justify-center bg-primary">
+        <div className="w-full max-w-6xl -lg:px-8">
+          <div className="flex h-screen w-full flex-row items-center text-center -lg:flex-col -lg:pt-32">
+            <div
+              className="flex flex-1 flex-col justify-around rounded-2xl border-2 border-textPrimary p-40 px-4"
+              id="top"
+            >
+              <div>
+                <h1 className="text-7xl font-bold -lg:text-6xl">Sign in</h1>
+              </div>
+              <div>
+                {/* call to action button of try now styled like mailchimp */}
+                {/* popout on hover */}
+                {Object.values(providers).map((provider) => (
+                  <div key={provider.id}>
+                    <button
+                      onClick={() =>
+                        void signIn(provider.id, {
+                          callbackUrl: "/home",
+                        })
+                      }
+                      title="Sign in with Google"
+                      className="mt-20 rounded-full border-2 border-textPrimary px-10 py-3 text-2xl text-textPrimary no-underline transition"
+                    >
+                      Sign in with Google {">"}
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-1 justify-end">
+              <img
+                src="/common/image/girl.png"
+                alt="PlayDate avatar"
+                className="h-full"
+              />
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  return homeRedirect(context);
 }
