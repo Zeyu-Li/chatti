@@ -82,8 +82,6 @@ model ChatSession {
     dateCreated DateTime @default(now())
     dateUpdated DateTime @updatedAt
     isHidden Boolean @default(false)
-
-    @@unique([userId])
 }
 
 model Message {
