@@ -48,7 +48,7 @@ model User {
     name          String?
     email         String?   @unique
     emailVerified DateTime?
-    image         String?
+    image         String? @db.Text
     accounts      Account[]
     sessions      Session[]
     chatSessions  ChatSession[]
@@ -87,7 +87,7 @@ model Message {
     id String @id @default(cuid())
     chatSessionId String
     chatSession ChatSession @relation(fields: [chatSessionId], references: [id], onDelete: Cascade)
-    text String
+    text String @db.Text
     dateCreated DateTime @default(now())
     sender String @default("/user")
 }
