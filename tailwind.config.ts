@@ -4,6 +4,9 @@ export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        "girl-default": "url(/_protected/profile.png')",
+      },
       colors: {
         primary: "#ffc500",
         secondary: "#7700ff",

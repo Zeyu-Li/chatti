@@ -10,6 +10,7 @@ import { type AppProps } from "next/app";
 import Header from "~/components/common/Header";
 import { useRouter } from "next/router";
 import { homeRedirect } from "~/utils/homeRedirect";
+import Title from "~/components/SEO/Title";
 
 export default function Login({ providers }: { providers: AppProps }) {
   const { data: sessionData } = useSession();
@@ -22,6 +23,7 @@ export default function Login({ providers }: { providers: AppProps }) {
   return (
     <>
       <Header session={sessionData} />
+      <Title title="PlayDate | Login" />
       <main className="flex min-h-screen flex-col items-center justify-center bg-primary">
         <div className="w-full max-w-6xl -lg:px-8">
           <div className="flex h-screen w-full flex-row items-center text-center -lg:flex-col -lg:pt-32">

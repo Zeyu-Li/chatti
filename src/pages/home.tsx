@@ -7,6 +7,8 @@ import Button from "~/components/common/Button";
 import PricingTable from "~/components/PricingTable";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Title from "~/components/SEO/Title";
+import Spinner from "~/components/common/Spinner";
 
 const NoChats = () => {
   return (
@@ -32,7 +34,7 @@ export default function Home() {
   const [upgradeScreen, setUpgradeScreen] = useState(false);
 
   const { data: sessionData } = useSession();
-  const { data: chatData } = api.getChats.getAllChats.useQuery(
+  const { data: chatData, isLoading } = api.getChats.getAllChats.useQuery(
     undefined, // no input
     { enabled: sessionData?.user !== undefined }
   );
@@ -57,6 +59,7 @@ export default function Home() {
   return (
     <>
       <Header session={sessionData} />
+      <Title title="PlayDate | Home" />
       <main className="flex min-h-screen flex-col bg-primary pt-24">
         <div id="home" className="w-full text-textPrimary">
           <div className="m-auto h-full w-full max-w-6xl px-2 py-16 -lg:px-8">
@@ -92,12 +95,20 @@ export default function Home() {
                           {/* </Link> */}
                         </td>
                         <td>{chat.personId}</td>
-                        <td>{chat.dateUpdated.toDateString()}</td>
+                        <td>
+                          {chat.dateUpdated.toDateString()}{" "}
+                          {chat.dateUpdated.toLocaleTimeString()}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                {chatData?.length ? null : (
+                {isLoading ? (
+                  <div className="animate-pulse pt-8 text-center">
+                    <Spinner />
+                  </div>
+                ) : null}
+                {chatData?.length || isLoading ? null : (
                   <div className="pt-8 text-center">
                     <div>
                       <p className="text-6xl text-textPrimary">

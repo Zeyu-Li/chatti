@@ -7,6 +7,7 @@ import Button from "~/components/common/Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Spinner from "~/components/common/Spinner";
+import Title from "~/components/SEO/Title";
 
 export default function ChatSession() {
   const router = useRouter();
@@ -64,16 +65,18 @@ export default function ChatSession() {
     const returnMessage: string = mutationResponse.text;
 
     // depending on how long the message is, wait for a certain amount of time
-    if (returnMessage.length < 10) {
+    if (returnMessage.length < 2) {
+      setIsTyping(false);
+    } else if (returnMessage.length < 10) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
     } else if (returnMessage.length < 20) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsTyping(false);
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setIsTyping(true);
       await new Promise((resolve) => setTimeout(resolve, 1000));
+      setIsTyping(true);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     } else {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 4000));
     }
     // append message to chat
     setChatMessages([
@@ -101,14 +104,33 @@ export default function ChatSession() {
   return (
     <>
       <Header session={sessionData} />
-      <main className="flex min-h-screen flex-col bg-primary p-4 pt-24">
-        <div className="m-auto w-full text-textPrimary">
-          <div className="m-auto h-full w-full max-w-6xl px-2 pt-16 font-semibold -lg:pt-8">
-            <h2 className="text-5xl">Kali</h2>
+      <Title title="PlayDate | Chatting with Kali" />
+      <main className="flex min-h-screen flex-col bg-primary p-4 pt-12">
+        <div className="m-auto w-full max-w-6xl text-textPrimary">
+          <div className="flex h-full w-full items-end justify-between px-2 pt-16 font-semibold -lg:pt-8">
+            {/* profile image */}
+            <div className="flex items-end">
+              <div className="mr-4">
+                <img
+                  src="/_protected/profile.png"
+                  alt="profile"
+                  className="h-20 w-20 rounded-full border-2 border-textPrimary"
+                />
+              </div>
+              <h2 className="text-5xl">Kali</h2>
+            </div>
+            <Link href="/home">
+              <button
+                title="Back"
+                className="button-animation rounded-full border-2 border-textPrimary bg-red-500 px-10 py-3 text-2xl text-textPrimary no-underline transition-all"
+              >
+                Back
+              </button>
+            </Link>
           </div>
         </div>
 
-        <div className="relative m-auto my-0 h-[60vh] w-full max-w-6xl snap-y snap-end overflow-auto rounded-xl border-2 border-textPrimary text-2xl text-textPrimary">
+        <div className="bg-girl-default relative m-auto my-0 h-[60vh] w-full max-w-6xl snap-y snap-end overflow-auto rounded-xl border-2 border-textPrimary text-2xl text-textPrimary">
           <div className="pb-12">
             {/* text messages */}
             {chatMessages?.map((message) => {
@@ -154,6 +176,7 @@ export default function ChatSession() {
             )}
           </div>
         </div>
+        {/* <form> */}
         <div className="m-auto flex w-full max-w-6xl justify-between rounded-xl border-2 border-textPrimary text-textPrimary">
           {/* input message box */}
           <input
@@ -163,6 +186,11 @@ export default function ChatSession() {
             onSubmit={() => sendChatMessage()}
             onChange={(e) => setCurrentMessage(e.target.value)}
             value={currentMessage}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                sendChatMessage();
+              }
+            }}
           />
           {/* send button */}
           <button
@@ -173,6 +201,7 @@ export default function ChatSession() {
             ➡️
           </button>
         </div>
+        {/* </form> */}
       </main>
     </>
   );

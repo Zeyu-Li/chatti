@@ -65,8 +65,6 @@ export const getChats = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const id = ctx.session.user.id;
-
       let ChatSession;
 
       // get ChatSession with id and append message to messages
@@ -81,8 +79,34 @@ export const getChats = createTRPCRouter({
         return [];
       }
 
-      // TODO: complex decision tree for return message
-      const messageResponse = "Testing message";
+      // complex decision tree for return message
+      const response = input.message.trim().toLowerCase();
+
+      const heyWords = ["hey", "hi", "hello", "howdy", "sup", "heya"];
+
+      let messageResponse = "So how was your day?";
+      // emoji responses
+      if (response.includes("😘")) {
+        messageResponse = "😘";
+      } else if (response.includes("👋")) {
+        messageResponse = "Heyyyy there";
+      } else if (response.includes("🥰")) {
+        messageResponse = "🥰";
+      }
+      // text contains
+      else if (heyWords.some((word) => response.includes(word))) {
+        messageResponse = "Hello there 👋";
+      } else if (response.includes("you")) {
+        if (response.includes("fine") || response.includes("good")) {
+          messageResponse = "Thanks! 🥺";
+        } else if (response.includes("bad") || response.includes("terrible")) {
+          messageResponse = "😢";
+        }
+      }
+      // how was your day || how are you
+      else if (response.includes("day")) {
+        messageResponse = "It was good, thanks for asking! 🥰";
+      }
 
       // save message to database
       try {
