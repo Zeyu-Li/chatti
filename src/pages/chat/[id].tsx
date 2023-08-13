@@ -33,7 +33,8 @@ export default function ChatSession() {
   }, [isLoading]);
 
   const sendChatMessage = async () => {
-    if (isTyping) {
+    const trimmedMessage = currentMessage.trim();
+    if (isTyping || trimmedMessage.length === 0) {
       // cannot send message
       // shake the screen instead
       return;
@@ -44,7 +45,7 @@ export default function ChatSession() {
       {
         id: "",
         sender: "/user",
-        text: currentMessage,
+        text: trimmedMessage,
         // @ts-ignore
         createdAt: new Date(),
       },
@@ -52,19 +53,24 @@ export default function ChatSession() {
 
     const mutationResponse = await newChatMessageMutation.mutateAsync({
       chatId: typeof router.query.id === "string" ? router.query.id : "",
-      message: currentMessage,
+      message: trimmedMessage,
     });
     // console.log(mutationResponse);
     // update chat messages
     setCurrentMessage("");
     setIsTyping(true);
 
+    // @ts-ignore
+    const returnMessage: string = mutationResponse.text;
+
     // depending on how long the message is, wait for a certain amount of time
-    if (currentMessage.length < 10) {
+    if (returnMessage.length < 10) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-    } else if (currentMessage.length < 20) {
+    } else if (returnMessage.length < 20) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsTyping(false);
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      setIsTyping(true);
       await new Promise((resolve) => setTimeout(resolve, 1000));
     } else {
       await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -75,15 +81,14 @@ export default function ChatSession() {
       {
         id: "",
         sender: "/user",
-        text: currentMessage,
+        text: trimmedMessage,
         // @ts-ignore
         createdAt: new Date(),
       },
       {
         id: "",
         sender: "kali",
-        // @ts-ignore
-        text: mutationResponse.text,
+        text: returnMessage,
         // @ts-ignore
         createdAt: new Date(),
       },
@@ -110,7 +115,7 @@ export default function ChatSession() {
               if (message.sender === "/user") {
                 return (
                   <span key={message.id}>
-                    <span className="float-right m-4 block max-w-[30%] break-words rounded-lg rounded-br-none border-2 border-textPrimary bg-teal-200 px-4 py-2 -lg:max-w-full">
+                    <span className="float-right m-4 block max-w-[30%] break-words rounded-lg rounded-br-none border-2 border-textPrimary bg-[#53ffd4] px-4 py-2 -lg:max-w-full">
                       {message.text}
                     </span>
                     <br />
@@ -137,7 +142,7 @@ export default function ChatSession() {
             )}
             {/* typing indicator */}
             {isTyping && (
-              <span className="absolute bottom-0 left-0 m-4 animate-pulse px-4 py-2 text-textPrimary">
+              <span className="absolute left-0 m-4 animate-pulse px-4 py-2 text-textPrimary">
                 <video
                   className="h-16 w-16"
                   autoPlay
@@ -161,7 +166,7 @@ export default function ChatSession() {
           />
           {/* send button */}
           <button
-            className="h-[68px] w-[72px] rounded-xl border-0 bg-teal-200 text-2xl text-textPrimary outline-none focus:outline-none"
+            className="h-[68px] w-[72px] rounded-[9px] border-0 border-l-2 border-textPrimary bg-[#53ffd4] text-2xl text-textPrimary outline-none transition-all hover:bg-[#53ffd4]/60 focus:outline-none"
             onClick={() => sendChatMessage()}
             title="Send Message"
           >
