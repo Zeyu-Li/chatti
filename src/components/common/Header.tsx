@@ -23,7 +23,7 @@ const Header: React.FC<Props> = ({ session }) => {
         {session ? (
           <Link
             href={"/logout"}
-            onClick={() => signOut()}
+            onClick={() => void signOut().catch((e) => console.error(e))}
             className="text-2xl font-bold text-textPrimary transition-all hover:text-textPrimaryHover"
           >
             {session ? "Logout" : "Login"}

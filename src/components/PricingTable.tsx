@@ -4,7 +4,7 @@ import CONSTANTS from "./constants/constants";
 
 interface Props {
   setUpgradeScreen: React.Dispatch<React.SetStateAction<boolean>>;
-  newChat: () => void;
+  newChat: () => Promise<void>;
   handleSubscription: (t: string) => void;
 }
 
@@ -130,7 +130,7 @@ const PricingTable: React.FC<Props> = ({
           points={["Up to 30 messages", "1 Chat Room"]}
           ButtonComponent={() => (
             <button
-              onClick={newChat}
+              onClick={() => void newChat()}
               title={"Try for free"}
               className={`button-animation rounded-full border-2 border-textPrimary px-10 py-3 text-2xl no-underline transition-all ${
                 false

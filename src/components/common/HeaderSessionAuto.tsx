@@ -20,7 +20,7 @@ const Header: React.FC = () => {
         {sessionData ? (
           <Link
             href={"/logout"}
-            onClick={() => signOut()}
+            onClick={() => void signOut().catch((e) => console.error(e))}
             className="text-2xl font-bold text-textPrimary transition-all hover:text-textPrimaryHover"
           >
             {sessionData ? "Logout" : "Login"}

@@ -15,7 +15,7 @@ const Custom404: NextPage = () => {
             <div className="flex flex-1 flex-col -lg:pt-32" id="top">
               <div>
                 <h1 className="text-6xl font-bold -lg:text-6xl">
-                  Looks like you're lost
+                  Looks like you{"'"}re lost
                 </h1>
               </div>
               <div>

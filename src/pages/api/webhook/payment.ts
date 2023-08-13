@@ -26,7 +26,7 @@ const subscription = async (req: NextApiRequest, res: NextApiResponse) => {
   // This is your Stripe CLI webhook secret for testing your endpoint locally.
   const endpointSecret = "whsec_DVArRQjSbA5STsYX0yr7xUDFbl8FbcWh";
 
-  let event;
+  let event: Stripe.Event;
   try {
     event = stripe.webhooks.constructEvent(buf, sig as string, endpointSecret);
     // Handle the event
@@ -40,7 +40,7 @@ const subscription = async (req: NextApiRequest, res: NextApiResponse) => {
         // Then define and call a function to handle the event checkout.session.async_payment_succeeded
         break;
       case "checkout.session.completed":
-        const checkoutSessionCompleted: any = event.data.object;
+        const checkoutSessionCompleted = event.data.object as any;
         // Then define and call a function to handle the event checkout.session.completed
         console.log("checkoutSessionCompleted: ", checkoutSessionCompleted);
         // update user's subscription status and associate email with customer

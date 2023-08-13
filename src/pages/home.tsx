@@ -54,7 +54,9 @@ export default function Home() {
       const mutationResponse = await newChatMutation.mutateAsync();
       // push /chat/[chatId] to router
       if (mutationResponse) {
-        router.push(`/chat/${mutationResponse.id}`);
+        router.push(`/chat/${mutationResponse.id}`).catch((err) => {
+          console.error(err);
+        });
       } else {
         setUpgradeScreen(false);
       }
@@ -66,12 +68,14 @@ export default function Home() {
     }
   };
 
-  const handleSubscription = async (t: string) => {
+  const handleSubscription = (t: string) => {
     // if (t === CONSTANTS.STRIPE_LIVE_URL_MONTHLY) {
     //   router.push(CONSTANTS.STRIPE_LIVE_URL_MONTHLY);
     // }
     // update
-    router.push(t);
+    router.push(t).catch((err) => {
+      console.error(err);
+    });
   };
 
   return (
@@ -85,7 +89,12 @@ export default function Home() {
               <h2 className="mb-8 text-5xl font-semibold">
                 Welcome back {sessionData?.user?.name}
               </h2>
-              <a className="mb-4" onClick={newChat}>
+              <a
+                className="mb-4"
+                onClick={() =>
+                  void newChat().catch((err) => console.error(err))
+                }
+              >
                 <Button text="Create a new chat" />
               </a>
             </div>
@@ -105,7 +114,11 @@ export default function Home() {
                       <tr
                         key={chat.id}
                         className="my-4 cursor-pointer rounded-xl transition-all hover:bg-textSecondary/20"
-                        onClick={() => router.push(`/chat/${chat.id}`)}
+                        onClick={() =>
+                          void router.push(`/chat/${chat.id}`).catch((err) => {
+                            console.error(err);
+                          })
+                        }
                         title={`Click to open chat ${chat.personId}`}
                       >
                         <td className="p-2">
@@ -129,7 +142,7 @@ export default function Home() {
                     <Spinner />
                   </div>
                 ) : null}
-                {chatData?.length || isLoading ? null : (
+                {chatData?.length ?? isLoading ? null : (
                   <div className="pt-8 text-center">
                     <div>
                       <p className="text-6xl text-textPrimary">

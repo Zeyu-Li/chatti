@@ -10,7 +10,7 @@ export default function Logout({ providers }: { providers: AppProps }) {
 
   if (sessionData) {
     try {
-      signOut();
+      signOut().catch((e) => console.error(e));
     } catch {
       console.log("error");
     }

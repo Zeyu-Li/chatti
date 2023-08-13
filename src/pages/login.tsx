@@ -11,7 +11,9 @@ export default function Login({ providers }: { providers: AppProps }) {
   const router = useRouter();
 
   if (sessionData) {
-    router.push("/home");
+    router.push("/home").catch((err) => {
+      console.error(err);
+    });
   }
 
   return (

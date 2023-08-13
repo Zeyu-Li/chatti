@@ -48,8 +48,8 @@ export default function ChatSession() {
         id: "",
         sender: "/user",
         text: trimmedMessage,
-        // @ts-ignore
-        createdAt: new Date(),
+        chatSessionId: "",
+        dateCreated: new Date(),
       },
     ]);
 
@@ -86,15 +86,15 @@ export default function ChatSession() {
         id: "",
         sender: "/user",
         text: trimmedMessage,
-        // @ts-ignore
-        createdAt: new Date(),
+        chatSessionId: "",
+        dateCreated: new Date(),
       },
       {
         id: "",
         sender: "kali",
         text: returnMessage,
-        // @ts-ignore
-        createdAt: new Date(),
+        chatSessionId: "",
+        dateCreated: new Date(),
       },
     ]);
 
@@ -184,19 +184,19 @@ export default function ChatSession() {
             type="text"
             className="h-16 w-full rounded-xl border-0 bg-primary px-4 text-2xl text-textPrimary outline-none placeholder:text-textPrimary/70 focus:outline-none"
             placeholder="Say Hi!"
-            onSubmit={() => sendChatMessage()}
+            onSubmit={() => void sendChatMessage()}
             onChange={(e) => setCurrentMessage(e.target.value)}
             value={currentMessage}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                sendChatMessage();
+                sendChatMessage().catch((err) => console.error(err));
               }
             }}
           />
           {/* send button */}
           <button
             className="h-[68px] w-[72px] rounded-[9px] border-0 border-l-2 border-textPrimary bg-[#53ffd4] text-2xl text-textPrimary outline-none transition-all hover:bg-[#53ffd4]/60 focus:outline-none"
-            onClick={() => sendChatMessage()}
+            onClick={() => void sendChatMessage()}
             title="Send Message"
             disabled={isTyping}
           >
