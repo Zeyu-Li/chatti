@@ -1,33 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  scroll-behavior: smooth;
-}
-
-.grow-in-text-size {
-  font-size: 72px;
-  animation: font-size 2s ease-in;
-}
-
-@keyframes font-size {
-  0% {
-    font-size: 12px;
-  }
-  100% {
-    font-size: 72px;
-  }
-}
-
-.button-animation:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 0px rgba(0, 0, 0, 1);
-}
-
-/* spinner */
 .lds-default {
-  display: inline-block;
   position: relative;
   width: 80px;
   height: 80px;

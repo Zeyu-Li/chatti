@@ -95,7 +95,7 @@ export const getChats = createTRPCRouter({
         });
 
         // response message from bot
-        await ctx.prisma.message.create({
+        return await ctx.prisma.message.create({
           data: {
             text: messageResponse,
             chatSessionId: input.chatId,
@@ -106,5 +106,11 @@ export const getChats = createTRPCRouter({
         console.error("Couldn't save message to database: ", err);
         return [];
       }
+
+      // return await ctx.prisma.message.findMany({
+      //   where: {
+      //     chatSessionId: input.chatId,
+      //   },
+      // });
     }),
 });
