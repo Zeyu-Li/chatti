@@ -8,7 +8,7 @@ import PricingTable from "~/components/PricingTable";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Title from "~/components/SEO/Title";
-import Spinner from "~/components/common/Spinner";
+import Spinner from "~/components/common/spinner/Spinner";
 
 const NoChats = () => {
   return (
@@ -32,6 +32,7 @@ const NoChats = () => {
 export default function Home() {
   const router = useRouter();
   const [upgradeScreen, setUpgradeScreen] = useState(false);
+  const [upgradeNowToast, setUpgradeNowToast] = useState(false);
 
   const { data: sessionData } = useSession();
   const { data: chatData, isLoading } = api.getChats.getAllChats.useQuery(
@@ -47,12 +48,19 @@ export default function Home() {
   // );
 
   const newChat = async () => {
-    const mutationResponse = await newChatMutation.mutateAsync();
-    // push /chat/[chatId] to router
-    if (mutationResponse) {
-      router.push(`/chat/${mutationResponse.id}`);
-    } else {
-      setUpgradeScreen(false);
+    try {
+      const mutationResponse = await newChatMutation.mutateAsync();
+      // push /chat/[chatId] to router
+      if (mutationResponse) {
+        router.push(`/chat/${mutationResponse.id}`);
+      } else {
+        setUpgradeScreen(false);
+      }
+    } catch (error) {
+      // has not upgraded
+      console.error(error);
+      setUpgradeNowToast(true);
+      setUpgradeScreen(true);
     }
   };
 
@@ -63,9 +71,14 @@ export default function Home() {
       <main className="flex min-h-screen flex-col bg-primary pt-24">
         <div id="home" className="w-full text-textPrimary">
           <div className="m-auto h-full w-full max-w-6xl px-2 py-16 -lg:px-8">
-            <h2 className="mb-8 text-5xl font-semibold">
-              Welcome back {sessionData?.user?.name}
-            </h2>
+            <div className="flex flex-col justify-between lg:flex-row">
+              <h2 className="mb-8 text-5xl font-semibold">
+                Welcome back {sessionData?.user?.name}
+              </h2>
+              <a className="mb-4" onClick={newChat}>
+                <Button text="Create a new chat" />
+              </a>
+            </div>
             {/* Table of chat logs */}
             <div className="w-full rounded-xl border-2 border-textPrimary text-textPrimary">
               <div className="p-8">
@@ -85,14 +98,12 @@ export default function Home() {
                         onClick={() => router.push(`/chat/${chat.id}`)}
                         title={`Click to open chat ${chat.personId}`}
                       >
-                        <td>
-                          {/* <Link href={`/chat/${chat.id}`}> */}
+                        <td className="p-1">
                           <img
                             src="/_protected/profile.png"
                             alt="screenshot"
                             className="h-12 w-12 rounded-full border-2 border-textPrimary p-2"
                           />
-                          {/* </Link> */}
                         </td>
                         <td>{chat.personId}</td>
                         <td>
@@ -145,6 +156,19 @@ export default function Home() {
               setUpgradeScreen={setUpgradeScreen}
               newChat={newChat}
             />
+          </div>
+        </div>
+      )}
+
+      {/* upgrade now toast message */}
+      {upgradeNowToast && (
+        <div className="pointer-events-none fixed left-0 top-0 z-50 w-full p-12 px-[25%]">
+          <div className="m-auto max-w-6xl">
+            <div className="rounded-xl bg-textPrimary p-4 text-textSecondary">
+              <p className="text-xl">
+                You need to upgrade to create more chats 🥺
+              </p>
+            </div>
           </div>
         </div>
       )}

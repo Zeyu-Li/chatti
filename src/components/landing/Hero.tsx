@@ -25,10 +25,17 @@ const Hero: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-1 justify-end">
-          <img
+          {/* <img
             src="/common/image/girl.png"
             alt="PlayDate avatar"
             className="h-full"
+          /> */}
+          <video
+            autoPlay
+            loop
+            muted
+            className="h-full"
+            src="/common/animation/wave.webm"
           />
         </div>
       </div>

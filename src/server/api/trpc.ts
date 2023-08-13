@@ -128,3 +128,84 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
  * @see https://trpc.io/docs/procedures
  */
 export const protectedProcedure = t.procedure.use(enforceUserIsAuthed);
+
+const enforceUserIsSubscribed = t.middleware(async ({ ctx, next }) => {
+  if (!ctx.session?.user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  // check if user is subscribed
+  // get User model from db
+  const user = await prisma.user.findUnique({
+    where: {
+      id: ctx.session.user.id,
+    },
+  });
+
+  // first check special case for admin
+  if (user?.isAdministrator) {
+    return next({
+      ctx: {
+        // infers the `session` as non-nullable
+        session: { ...ctx.session, user: ctx.session.user },
+      },
+    });
+  }
+
+  // check if user is on trial mode
+  // first check if user has less than 1 ChatSessions
+  const chatSessions = await prisma.chatSession.findMany({
+    where: {
+      userId: ctx.session.user.id,
+    },
+  });
+  if (chatSessions.length === 0) {
+    return next({
+      ctx: {
+        // infers the `session` as non-nullable
+        session: { ...ctx.session, user: ctx.session.user },
+      },
+    });
+  }
+
+  // check if subscription is active
+  if (user?.dateExpires && user.dateExpires < new Date()) {
+    // update user to not subscribed
+    await prisma.user.update({
+      where: {
+        id: ctx.session.user.id,
+      },
+      data: {
+        isSubscribed: false,
+      },
+    });
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "User subscription has expired",
+    });
+  }
+
+  // check if user is subscribed
+  if (!user?.isSubscribed) {
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "User is not subscribed",
+    });
+  }
+  return next({
+    ctx: {
+      // infers the `session` as non-nullable
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
+});
+
+/**
+ * Subscribed (authenticated) procedure
+ *
+ * If you want to create a new chat to ONLY be accessible to subbed users, use this. It verifies
+ * if trial run and subscriptions.
+ *
+ * @see https://trpc.io/docs/procedures
+ */
+export const subscribedProcedure = t.procedure.use(enforceUserIsSubscribed);

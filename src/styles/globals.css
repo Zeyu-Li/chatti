@@ -111,3 +111,14 @@ body {
     transform: scale(1.5);
   }
 }
+
+/* image opacity gradient */
+.image-mask {
+  -webkit-mask-image: -webkit-gradient(
+    linear,
+    left 75%,
+    left bottom,
+    from(rgba(0, 0, 0, 1)),
+    to(rgba(0, 0, 0, 0.1))
+  );
+}

@@ -3,6 +3,7 @@ import {
   createTRPCRouter,
   publicProcedure,
   protectedProcedure,
+  subscribedProcedure,
 } from "~/server/api/trpc";
 
 export const getChats = createTRPCRouter({
@@ -23,7 +24,7 @@ export const getChats = createTRPCRouter({
     });
   }),
 
-  createNewChat: protectedProcedure.mutation(async ({ ctx }) => {
+  createNewChat: subscribedProcedure.mutation(async ({ ctx }) => {
     const id = ctx.session.user.id;
 
     // TODO: check if subscription or chat already exists

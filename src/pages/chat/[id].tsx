@@ -6,7 +6,7 @@ import Link from "next/link";
 import Button from "~/components/common/Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Spinner from "~/components/common/Spinner";
+import Spinner from "~/components/common/spinner/Spinner";
 import Title from "~/components/SEO/Title";
 
 export default function ChatSession() {
@@ -136,7 +136,7 @@ export default function ChatSession() {
             {chatMessages?.map((message) => {
               if (message.sender === "/user") {
                 return (
-                  <span key={message.id}>
+                  <span key={`user-${message.id}`}>
                     <span className="float-right m-4 block max-w-[30%] break-words rounded-lg rounded-br-none border-2 border-textPrimary bg-[#53ffd4] px-4 py-2 -lg:max-w-full">
                       {message.text}
                     </span>
@@ -146,7 +146,7 @@ export default function ChatSession() {
                 );
               } else {
                 return (
-                  <span key={message.id}>
+                  <span key={`other-${message.id}`}>
                     <span className="float-left m-4 block max-w-[30%] break-words rounded-lg rounded-bl-none border-2 border-textPrimary px-4 py-2 text-justify -lg:max-w-full">
                       {message.text}
                     </span>
@@ -197,8 +197,9 @@ export default function ChatSession() {
             className="h-[68px] w-[72px] rounded-[9px] border-0 border-l-2 border-textPrimary bg-[#53ffd4] text-2xl text-textPrimary outline-none transition-all hover:bg-[#53ffd4]/60 focus:outline-none"
             onClick={() => sendChatMessage()}
             title="Send Message"
+            disabled={isTyping}
           >
-            ➡️
+            {isTyping ? "🔒" : "➡️"}
           </button>
         </div>
         {/* </form> */}
