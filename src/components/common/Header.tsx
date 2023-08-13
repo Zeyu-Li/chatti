@@ -21,13 +21,16 @@ const Header: React.FC<Props> = ({ session }) => {
 
         {/* login */}
         {session ? (
-          <Link
-            href={"/logout"}
-            onClick={() => void signOut().catch((e) => console.error(e))}
+          <a
+            onClick={() =>
+              void signOut().catch((e) =>
+                console.error("andrew: error signing out ", e)
+              )
+            }
             className="text-2xl font-bold text-textPrimary transition-all hover:text-textPrimaryHover"
           >
-            {session ? "Logout" : "Login"}
-          </Link>
+            Logout
+          </a>
         ) : (
           <Link
             href="/login"

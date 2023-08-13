@@ -12,8 +12,8 @@ datasource db {
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url               =  env("DIRECT_URL") // env("DATABASE_URL")
-    directUrl         = env("DIRECT_URL")
+    url               =  env("DATABASE_URL") // env("DATABASE_URL")
+    // directUrl         = env("DIRECT_URL")
 }
 
 // Necessary for Next auth
@@ -41,6 +41,7 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userSession  String?  @unique
 }
 
 model User {
@@ -49,7 +50,7 @@ model User {
     email         String?   @unique
     emailVerified DateTime?
     image         String? @db.Text
-    accounts      Account[]
+    accounts      Account
     sessions      Session[]
     chatSessions  ChatSession[]
     picture       String? 

@@ -4,17 +4,27 @@ import Header from "~/components/common/Header";
 import { getServerSession } from "next-auth";
 import { authOptions } from "~/server/auth";
 import { ServerSidePropsContext } from "~/utils/types";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Logout({ providers }: { providers: AppProps }) {
   const { data: sessionData } = useSession();
+  const router = useRouter();
 
+  // useEffect(() => {
   if (sessionData) {
     try {
-      signOut().catch((e) => console.error(e));
+      signOut()
+        .then(() => router.push("/login"))
+        .catch((e) => console.error(e));
     } catch {
       console.log("error");
+      router.push("/login").catch((err) => {
+        console.error(err);
+      });
     }
   }
+  // }, [sessionData]);
 
   return (
     <>
@@ -28,17 +38,4 @@ export default function Logout({ providers }: { providers: AppProps }) {
       </main>
     </>
   );
-}
-
-export async function getServerSideProps({ req, res }: ServerSidePropsContext) {
-  const session = await getServerSession(req, res, authOptions);
-  if (!session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/login",
-      },
-      props: {},
-    };
-  }
 }
