@@ -23,7 +23,7 @@ export default function Logout({ providers }: { providers: AppProps }) {
         {/* pulse content */}
 
         <div className="w-full max-w-6xl -lg:px-8">
-          <div className="flex h-screen w-full animate-pulse flex-row items-center bg-white/80 -lg:flex-col"></div>
+          <div className="flex min-h-screen w-full animate-pulse flex-row items-center bg-white/80 -lg:flex-col"></div>
         </div>
       </main>
     </>

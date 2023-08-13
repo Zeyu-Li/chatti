@@ -6,9 +6,9 @@ body {
   scroll-behavior: smooth;
 }
 
-.grow-in-text-size {
+.grow-in-text-size p {
   font-size: 72px;
-  animation: font-size 2s ease-in;
+  animation: font-size 1s ease-in;
 }
 
 @keyframes font-size {
@@ -23,6 +23,10 @@ body {
 .button-animation:hover {
   transform: translateY(-6px);
   box-shadow: 0 6px 0px rgba(0, 0, 0, 1);
+}
+.button-animation:active {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 0px rgba(0, 0, 0, 1);
 }
 
 /* float opacity animation */

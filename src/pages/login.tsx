@@ -20,7 +20,7 @@ export default function Login({ providers }: { providers: AppProps }) {
       <Title title="PlayDate | Login" />
       <main className="flex min-h-screen flex-col items-center justify-center bg-primary">
         <div className="w-full max-w-6xl -lg:px-8">
-          <div className="flex h-screen w-full flex-row items-center text-center -lg:flex-col -lg:pt-32">
+          <div className="flex min-h-screen w-full flex-row items-center text-center -lg:flex-col -lg:pt-32">
             <div
               className="flex flex-1 flex-col justify-around rounded-2xl border-2 border-textPrimary p-40 px-4"
               id="top"

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ScrollAnimation from "react-animate-on-scroll";
 
 const Showcase: React.FC = () => {
   return (
@@ -8,13 +9,15 @@ const Showcase: React.FC = () => {
           Experience Realtime Responses
         </h2>
         {/* screenshot img */}
-        <div className="">
-          <img
-            src="/landing/img/screenshotCropped.png"
-            alt="screenshot of app"
-            className="image-mask m-auto mt-16 w-4/5 rounded-3xl rounded-b-none border-2 border-textPrimary -lg:w-full"
-          />
-        </div>
+        <ScrollAnimation animateIn="fadeIn" offset={300}>
+          <div>
+            <img
+              src="/landing/img/screenshotCropped.png"
+              alt="screenshot of app"
+              className="image-mask m-auto mt-16 w-4/5 rounded-3xl rounded-b-none border-2 border-textPrimary -lg:w-full"
+            />
+          </div>
+        </ScrollAnimation>
       </div>
     </div>
   );

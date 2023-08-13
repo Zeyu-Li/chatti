@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import Title from "~/components/SEO/Title";
 import Spinner from "~/components/common/spinner/Spinner";
 import CONSTANTS from "~/components/constants/constants";
+import { ServerSidePropsContext } from "~/utils/types";
 
 const NoChats = () => {
   return (
@@ -186,6 +187,6 @@ export default function Home() {
   );
 }
 
-// export async function getServerSideProps({ req, res }: ServerSidePropsContext) {
-//   return protectedPage(req, res);
-// }
+export async function getServerSideProps({ req, res }: ServerSidePropsContext) {
+  return protectedPage(req, res);
+}

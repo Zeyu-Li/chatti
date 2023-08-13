@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Button from "../common/Button";
+import ScrollAnimation from "react-animate-on-scroll";
 
 const TryIt: React.FC = () => {
   return (
@@ -8,7 +9,9 @@ const TryIt: React.FC = () => {
         <h2 className="text-7xl">Talk to your Date</h2>
         <span className="inline pb-12">
           <p className="inline text-8xl"> </p>
-          <p className="grow-in-text-size inline">Now</p>
+          <ScrollAnimation animateIn="grow-in-text-size" className="inline">
+            <p className="inline">Now</p>
+          </ScrollAnimation>
           <p className="inline text-8xl"> </p>
         </span>
         <Link href="/login">
