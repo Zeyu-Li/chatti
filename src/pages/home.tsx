@@ -94,21 +94,21 @@ export default function Home() {
                     {chatData?.map((chat) => (
                       <tr
                         key={chat.id}
-                        className="my-4 cursor-pointer"
+                        className="my-4 cursor-pointer rounded-xl transition-all hover:bg-textSecondary/20"
                         onClick={() => router.push(`/chat/${chat.id}`)}
                         title={`Click to open chat ${chat.personId}`}
                       >
-                        <td className="p-1">
+                        <td className="p-2">
                           <img
                             src="/_protected/profile.png"
                             alt="screenshot"
-                            className="h-12 w-12 rounded-full border-2 border-textPrimary p-2"
+                            className="h-12 w-12 rounded-full border-2 border-textPrimary"
                           />
                         </td>
                         <td>{chat.personId}</td>
                         <td>
                           {chat.dateUpdated.toDateString()}{" "}
-                          {chat.dateUpdated.toLocaleTimeString()}
+                          {/* {chat.dateUpdated.toLocaleTimeString()} */}
                         </td>
                       </tr>
                     ))}
@@ -176,6 +176,6 @@ export default function Home() {
   );
 }
 
-// export async function getServerSideProps({ req, res }: any) {
+// export async function getServerSideProps({ req, res }: ServerSidePropsContext) {
 //   return protectedPage(req, res);
 // }

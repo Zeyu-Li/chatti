@@ -1,10 +1,9 @@
-import { api } from "~/utils/api";
-import { getSession, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { type AppProps } from "next/app";
 import Header from "~/components/common/Header";
-import { useRouter } from "next/router";
 import { getServerSession } from "next-auth";
 import { authOptions } from "~/server/auth";
+import { ServerSidePropsContext } from "~/utils/types";
 
 export default function Logout({ providers }: { providers: AppProps }) {
   const { data: sessionData } = useSession();
@@ -31,7 +30,7 @@ export default function Logout({ providers }: { providers: AppProps }) {
   );
 }
 
-export async function getServerSideProps({ req, res }: any) {
+export async function getServerSideProps({ req, res }: ServerSidePropsContext) {
   const session = await getServerSession(req, res, authOptions);
   if (!session) {
     return {

@@ -1,6 +1,7 @@
 import { getProviders, getSession } from "next-auth/react";
+import { ServerSidePropsContext } from "./types";
 
-export async function homeRedirect(context: any) {
+export async function homeRedirect(context: ServerSidePropsContext) {
   const providers = await getProviders();
   const session = await getSession(context);
 

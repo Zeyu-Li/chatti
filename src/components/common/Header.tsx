@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { Session } from "next-auth";
 
 interface Props {
-  session: any;
+  session: Session | null;
 }
 
 const Header: React.FC<Props> = ({ session }) => {

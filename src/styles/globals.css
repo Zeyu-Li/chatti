@@ -25,6 +25,39 @@ body {
   box-shadow: 0 6px 0px rgba(0, 0, 0, 1);
 }
 
+/* float opacity animation */
+.fadeIn > * {
+  opacity: 0;
+  animation: opacity-animation 300ms ease-in forwards;
+}
+
+@keyframes opacity-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 100;
+    transform: translateY(0);
+  }
+}
+
+.fadeIn > *:nth-child(1) {
+  animation-delay: 100ms;
+}
+
+.fadeIn > *:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.fadeIn > *:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+.fadeIn > *:nth-child(4) {
+  animation-delay: 400ms;
+}
+
 /* spinner */
 .lds-default {
   display: inline-block;
@@ -36,7 +69,7 @@ body {
   position: absolute;
   width: 6px;
   height: 6px;
-  background: #fff;
+  background: #312f27;
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
 }

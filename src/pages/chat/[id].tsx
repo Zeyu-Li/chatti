@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Spinner from "~/components/common/spinner/Spinner";
 import Title from "~/components/SEO/Title";
+import { ServerSidePropsContext } from "~/utils/types";
 
 export default function ChatSession() {
   const router = useRouter();
@@ -208,6 +209,6 @@ export default function ChatSession() {
   );
 }
 
-export async function getServerSideProps({ req, res }: any) {
+export async function getServerSideProps({ req, res }: ServerSidePropsContext) {
   return protectedPage(req, res);
 }

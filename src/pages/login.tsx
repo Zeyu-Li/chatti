@@ -1,16 +1,10 @@
-import { api } from "~/utils/api";
-import {
-  getProviders,
-  getSession,
-  signIn,
-  signOut,
-  useSession,
-} from "next-auth/react";
+import { getProviders, getSession, signIn, useSession } from "next-auth/react";
 import { type AppProps } from "next/app";
 import Header from "~/components/common/Header";
 import { useRouter } from "next/router";
 import { homeRedirect } from "~/utils/homeRedirect";
 import Title from "~/components/SEO/Title";
+import { ServerSidePropsContext } from "~/utils/types";
 
 export default function Login({ providers }: { providers: AppProps }) {
   const { data: sessionData } = useSession();
@@ -55,10 +49,17 @@ export default function Login({ providers }: { providers: AppProps }) {
               </div>
             </div>
             <div className="flex flex-1 justify-end">
-              <img
+              {/* <img
                 src="/common/image/girl.png"
                 alt="PlayDate avatar"
                 className="h-full"
+              /> */}
+              <video
+                autoPlay
+                loop
+                muted
+                className="h-full"
+                src="/common/animation/wave.webm"
               />
             </div>
           </div>
@@ -68,7 +69,7 @@ export default function Login({ providers }: { providers: AppProps }) {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: ServerSidePropsContext) {
   const session = await getSession(context);
   console.warn("session", session);
 

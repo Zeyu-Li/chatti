@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React from "react";
+import CONSTANTS from "./constants/constants";
 
 interface Props {
   setUpgradeScreen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -146,16 +148,18 @@ const PricingTable: React.FC<Props> = ({ setUpgradeScreen, newChat }) => {
             "Unlock new Characters (Soon)",
           ]}
           ButtonComponent={() => (
-            <button
-              title={"Get Started >"}
-              className={`button-animation rounded-full border-2 border-textPrimary px-10 py-3 text-2xl no-underline transition-all ${
-                false
-                  ? "bg-primary text-textPrimary"
-                  : "bg-secondary text-textSecondary"
-              }`}
-            >
-              {"Get Started >"}
-            </button>
+            <Link href={CONSTANTS.STRIPE_LIVE_URL_MONTHLY} target="_blank">
+              <button
+                title={"Get Started >"}
+                className={`button-animation rounded-full border-2 border-textPrimary px-10 py-3 text-2xl no-underline transition-all ${
+                  false
+                    ? "bg-primary text-textPrimary"
+                    : "bg-secondary text-textSecondary"
+                }`}
+              >
+                {"Get Started >"}
+              </button>
+            </Link>
           )}
         />
         <PricingCard

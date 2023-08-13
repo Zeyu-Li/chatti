@@ -42,3 +42,5 @@ yarn-error.log*
 *.tsbuildinfo
 .env.production
 *.blend1
+*.psd
+ngrok.exe
