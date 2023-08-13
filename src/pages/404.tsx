@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Link from "next/link";
 import Button from "../components/common/Button";
-import Header from "../components/common/Header";
+import Header from "../components/common/HeaderSessionAuto";
 import Title from "../components/SEO/Title";
 
 const Custom404: NextPage = () => {

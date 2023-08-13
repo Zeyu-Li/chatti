@@ -19,3 +19,8 @@ body {
     font-size: 72px;
   }
 }
+
+.button-animation:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 0px rgba(0, 0, 0, 1);
+}

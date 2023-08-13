@@ -60,7 +60,7 @@ model User {
     sessions      Session[]
     chatSessions  ChatSession[]
     picture       String? 
-    stripeCustomerId String?
+    stripeCustomerId String? @unique
     dateExpires   DateTime? @default(now())
     dateCreated   DateTime  @default(now())
     dateSubscribed DateTime? 

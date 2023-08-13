@@ -1,15 +1,20 @@
-import { getProviders, getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
+import { authOptions } from "~/server/auth";
 
-export async function protectedPage(context: any) {
-  const providers = await getProviders();
-  const session = await getSession(context);
+export async function protectedPage(req: any, res: any) {
+  const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
-    context.res.writeHead(302, { Location: "/login" });
-    context.res.end();
-    return {};
+    res.writeHead(302, { Location: "/login" });
+    res.end();
+    return {
+      props: {},
+    };
   }
   return {
-    props: { providers },
+    props: {
+      session,
+    },
   };
 }

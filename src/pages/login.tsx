@@ -21,7 +21,7 @@ export default function Login({ providers }: { providers: AppProps }) {
 
   return (
     <>
-      <Header />
+      <Header session={sessionData} />
       <main className="flex min-h-screen flex-col items-center justify-center bg-primary">
         <div className="w-full max-w-6xl -lg:px-8">
           <div className="flex h-screen w-full flex-row items-center text-center -lg:flex-col -lg:pt-32">
@@ -44,7 +44,7 @@ export default function Login({ providers }: { providers: AppProps }) {
                         })
                       }
                       title="Sign in with Google"
-                      className="mt-20 rounded-full border-2 border-textPrimary px-10 py-3 text-2xl text-textPrimary no-underline transition"
+                      className="button-animation mt-20 rounded-full border-2 border-textPrimary px-10 py-3 text-2xl text-textPrimary no-underline transition"
                     >
                       Sign in with Google {">"}
                     </button>
@@ -67,5 +67,22 @@ export default function Login({ providers }: { providers: AppProps }) {
 }
 
 export async function getServerSideProps(context: any) {
-  return homeRedirect(context);
+  const session = await getSession(context);
+  console.warn("session", session);
+
+  if (session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/home",
+      },
+      props: {},
+    };
+  }
+
+  const providers = await getProviders();
+
+  return {
+    props: { providers },
+  };
 }
