@@ -73,7 +73,6 @@ export default function Login({ providers }: { providers: AppProps }) {
 
 export async function getServerSideProps(context: ServerSidePropsContext) {
   const session = await getSession(context);
-  console.warn("session", session);
 
   if (session) {
     return {

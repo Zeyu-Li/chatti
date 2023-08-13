@@ -86,8 +86,24 @@ export const getChats = createTRPCRouter({
       const heyWords = ["hey", "hi", "hello", "howdy", "sup", "heya"];
 
       let messageResponse = "So how was your day?";
+      // more formed responses first
+      if (response.includes("how are you")) {
+        messageResponse = "I'm good, thanks for asking! 🥰";
+      } else if (response.includes("how was your day")) {
+        messageResponse = "It was good, thanks for asking! 🥰";
+      } else if (response.includes("what's up")) {
+        messageResponse = "Not much, just chilling. You?";
+      } else if (response.includes("what are you doing")) {
+        messageResponse = "Just hanging out, you?";
+      } else if (response.includes("what are you up to")) {
+        messageResponse = "Not much, just chilling. You?";
+      } else if (response.includes("who are you")) {
+        messageResponse = "I'm Kali 👋";
+      } else if (response.includes("thank you")) {
+        messageResponse = "No problem! 😘";
+      }
       // emoji responses
-      if (response.includes("😘")) {
+      else if (response.includes("😘")) {
         messageResponse = "😘";
       } else if (response.includes("👋")) {
         messageResponse = "Heyyyy there";
