@@ -18,11 +18,13 @@
     "@trpc/next": "^10.34.0",
     "@trpc/react-query": "^10.34.0",
     "@trpc/server": "^10.34.0",
+    "micro": "^10.0.1",
     "next": "^13.4.2",
     "next-auth": "^4.22.4",
     "react": "18.2.0",
     "react-animate-on-scroll": "^2.1.7",
     "react-dom": "18.2.0",
+    "stripe": "^12.18.0",
     "superjson": "^1.13.1",
     "zod": "^3.21.4"
   },

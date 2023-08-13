@@ -5,6 +5,7 @@ import CONSTANTS from "./constants/constants";
 interface Props {
   setUpgradeScreen: React.Dispatch<React.SetStateAction<boolean>>;
   newChat: () => void;
+  handleSubscription: (t: string) => void;
 }
 
 interface PricingProp {
@@ -28,7 +29,7 @@ const PricingCard: React.FC<PricingProp> = ({
 }) => {
   return (
     <div
-      className={`flex h-full max-w-lg flex-col justify-between rounded-lg border border-textPrimary p-6 text-center xl:p-8 ${
+      className={`m-auto flex h-full max-w-lg flex-col justify-between rounded-lg border border-textPrimary p-6 text-center xl:p-8 ${
         popular
           ? "bg-secondary text-textSecondary"
           : "bg-white text-textPrimary"
@@ -82,7 +83,11 @@ const PricingCard: React.FC<PricingProp> = ({
   );
 };
 
-const PricingTable: React.FC<Props> = ({ setUpgradeScreen, newChat }) => {
+const PricingTable: React.FC<Props> = ({
+  setUpgradeScreen,
+  newChat,
+  handleSubscription,
+}) => {
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-8 lg:px-6 lg:py-16">
       {/* close box */}
@@ -148,7 +153,11 @@ const PricingTable: React.FC<Props> = ({ setUpgradeScreen, newChat }) => {
             "Unlock new Characters (Soon)",
           ]}
           ButtonComponent={() => (
-            <Link href={CONSTANTS.STRIPE_LIVE_URL_MONTHLY} target="_blank">
+            <a
+              onClick={() =>
+                handleSubscription(CONSTANTS.STRIPE_LIVE_URL_MONTHLY)
+              }
+            >
               <button
                 title={"Get Started >"}
                 className={`button-animation rounded-full border-2 border-textPrimary px-10 py-3 text-2xl no-underline transition-all ${
@@ -159,7 +168,7 @@ const PricingTable: React.FC<Props> = ({ setUpgradeScreen, newChat }) => {
               >
                 {"Get Started >"}
               </button>
-            </Link>
+            </a>
           )}
         />
         <PricingCard
@@ -175,16 +184,22 @@ const PricingTable: React.FC<Props> = ({ setUpgradeScreen, newChat }) => {
             "Save 20%",
           ]}
           ButtonComponent={() => (
-            <button
-              title={"Get Started >"}
-              className={`button-animation rounded-full border-2 border-textPrimary px-10 py-3 text-2xl no-underline transition-all ${
-                true
-                  ? "bg-primary text-textPrimary"
-                  : "bg-secondary text-textSecondary"
-              }`}
+            <a
+              onClick={() =>
+                handleSubscription(CONSTANTS.STRIPE_LIVE_URL_YEARLY)
+              }
             >
-              {"Get Started >"}
-            </button>
+              <button
+                title={"Get Started >"}
+                className={`button-animation rounded-full border-2 border-textPrimary px-10 py-3 text-2xl no-underline transition-all ${
+                  true
+                    ? "bg-primary text-textPrimary"
+                    : "bg-secondary text-textSecondary"
+                }`}
+              >
+                {"Get Started >"}
+              </button>
+            </a>
           )}
         />
       </div>

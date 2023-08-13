@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Title from "~/components/SEO/Title";
 import Spinner from "~/components/common/spinner/Spinner";
+import CONSTANTS from "~/components/constants/constants";
 
 const NoChats = () => {
   return (
@@ -62,6 +63,14 @@ export default function Home() {
       setUpgradeNowToast(true);
       setUpgradeScreen(true);
     }
+  };
+
+  const handleSubscription = async (t: string) => {
+    // if (t === CONSTANTS.STRIPE_LIVE_URL_MONTHLY) {
+    //   router.push(CONSTANTS.STRIPE_LIVE_URL_MONTHLY);
+    // }
+    // update
+    router.push(t);
   };
 
   return (
@@ -153,6 +162,7 @@ export default function Home() {
         <div className="fixed left-0 top-0 z-50 h-screen w-screen overflow-y-auto bg-primary">
           <div className="m-auto max-w-6xl">
             <PricingTable
+              handleSubscription={handleSubscription}
               setUpgradeScreen={setUpgradeScreen}
               newChat={newChat}
             />

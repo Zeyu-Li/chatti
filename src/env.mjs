@@ -26,6 +26,9 @@ export const env = createEnv({
     GOOGLE_CLIENT_SECRET: z.string(),
     STRIPE_LIVE_URL_MONTHLY: z.string().url(),
     STRIPE_LIVE_URL_YEARLY: z.string().url(),
+
+    STRIPE_PUBLIC_KEY: z.string(),
+    STRIPE_SECRET_KEY: z.string(),
   },
 
   /**
@@ -51,6 +54,8 @@ export const env = createEnv({
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     STRIPE_LIVE_URL_MONTHLY: process.env.STRIPE_LIVE_URL_MONTHLY,
     STRIPE_LIVE_URL_YEARLY: process.env.STRIPE_LIVE_URL_YEARLY,
+    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
