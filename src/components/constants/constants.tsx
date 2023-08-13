@@ -19,8 +19,8 @@ const CONSTANTS = {
   DEFAULT_TWITTER_TITLE: DEFAULT_TITLE,
   DEFAULT_TWITTER_DESCRIPTION: DEFAULT_DESCRIPTION,
   DEFAULT_GOOGLE_ANALYTICS: "G-KLVV6HWCRZ",
-  STRIPE_LIVE_URL_MONTHLY: "https://buy.stripe.com/test_dR68wz6sC1n408g6oo",
-  STRIPE_LIVE_URL_YEARLY: "https://buy.stripe.com/test_dR69ADg3c3vcg7efYZ",
+  STRIPE_LIVE_URL_MONTHLY: "https://buy.stripe.com/3cs7wr0QQarc240dQQ",
+  STRIPE_LIVE_URL_YEARLY: "https://buy.stripe.com/4gw3gbgPOeHs2408wx",
 };
 
 export default CONSTANTS;
