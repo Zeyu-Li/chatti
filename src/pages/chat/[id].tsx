@@ -195,7 +195,9 @@ export default function ChatSession() {
           />
           {/* send button */}
           <button
-            className="h-[68px] w-[72px] rounded-[9px] border-0 border-l-2 border-textPrimary bg-[#53ffd4] text-2xl text-textPrimary outline-none transition-all hover:bg-[#53ffd4]/60 focus:outline-none"
+            className={`h-[68px] w-[72px] rounded-[9px] border-0 border-l-2 border-textPrimary text-2xl text-textPrimary outline-none transition-all focus:outline-none ${
+              isTyping ? "bg-red-500" : "bg-[#53ffd4] hover:bg-[#53ffd4]/60"
+            }`}
             onClick={() => void sendChatMessage()}
             title="Send Message"
             disabled={isTyping}
