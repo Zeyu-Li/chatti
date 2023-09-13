@@ -6,6 +6,10 @@ Talk to your PlayDate now
 
 
 
+https://github.com/Zeyu-Li/playdate/assets/34993025/9504d71f-8a70-42a9-9ec8-e35d5f9952ed
+
+
+
 ----
 
 # Create T3 App
