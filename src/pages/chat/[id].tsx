@@ -183,7 +183,7 @@ export default function ChatSession() {
           <input
             type="text"
             className="h-16 w-full rounded-xl border-0 bg-primary px-4 text-2xl text-textPrimary outline-none placeholder:text-textPrimary/70 focus:outline-none"
-            placeholder="Say Hi!"
+            placeholder="Say Hello!"
             onSubmit={() => void sendChatMessage()}
             onChange={(e) => setCurrentMessage(e.target.value)}
             value={currentMessage}
