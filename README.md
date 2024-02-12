@@ -4,6 +4,12 @@ Talk to your AI Companion now
 
 ## Demo
 
+
+
+https://github.com/Zeyu-Li/chatti/assets/34993025/8653906f-2278-4933-99ca-9be291f3e738
+
+
+
 ## UML
 
 ![uml](./assets/uml.png)
