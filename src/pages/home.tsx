@@ -16,7 +16,7 @@ const NoChats = () => {
   return (
     <div className="text-center">
       <div>
-        <p className="text-6xl text-textPrimary">No chats yet 🥺</p>
+        <p className="text-6xl text-textPrimary">No chats yet 😔</p>
         {/* image of girl */}
         <div className="m-8">
           <img
@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <>
       <Header session={sessionData} />
-      <Title title="PlayDate | Home" />
+      <Title title="Chatti | Home" />
       <main className="flex min-h-screen flex-col bg-primary pt-24">
         <div id="home" className="w-full text-textPrimary">
           <div className="m-auto h-full w-full max-w-6xl px-2 py-16 -lg:px-8">
@@ -146,7 +146,7 @@ export default function Home() {
                   <div className="pt-8 text-center">
                     <div>
                       <p className="text-6xl text-textPrimary">
-                        No chats yet 🥺
+                        No chats yet 😔
                       </p>
                       {/* image of girl */}
                       <div className="m-8">
@@ -190,7 +190,7 @@ export default function Home() {
           <div className="m-auto max-w-6xl">
             <div className="rounded-xl bg-textPrimary p-4 text-textSecondary">
               <p className="text-xl">
-                You need to upgrade to create more chats 🥺
+                You need to upgrade to create more chats 😔
               </p>
             </div>
           </div>

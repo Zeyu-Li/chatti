@@ -6,9 +6,11 @@ const Hero: React.FC = () => {
     <div className="w-full max-w-6xl -lg:px-8">
       <div className="flex h-screen w-full flex-row items-center -lg:flex-col">
         <div className="fadeIn flex flex-1 flex-col -lg:pt-32" id="top">
-          <h1 className="text-7xl font-bold -lg:text-6xl">Dating Done Easy</h1>
+          <h1 className="text-7xl font-bold -lg:text-6xl">
+            Collaborate with a Buddy
+          </h1>
           <h2 className="py-8 text-4xl font-bold text-textPrimary/90">
-            Friendly Conversations
+            Your AI Friend
           </h2>
           <div>
             {/* call to action button of try now styled like mailchimp */}

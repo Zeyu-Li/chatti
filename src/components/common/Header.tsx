@@ -13,8 +13,8 @@ const Header: React.FC<Props> = ({ session }) => {
         {/* logo image */}
         <Link href={session ? "/home" : "/"}>
           <img
-            src="/common/vector/playdate.svg"
-            alt="PlayDate logo"
+            src="/common/vector/chatti.svg"
+            alt="Chatti Logo"
             className="h-12 w-36 cursor-pointer"
           />
         </Link>

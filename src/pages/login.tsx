@@ -19,7 +19,7 @@ export default function Login({ providers }: { providers: AppProps }) {
   return (
     <>
       <Header session={sessionData} />
-      <Title title="PlayDate | Login" />
+      <Title title="Chatti | Login" />
       <main className="flex min-h-screen flex-col items-center justify-center bg-primary">
         <div className="w-full max-w-6xl -lg:px-8">
           <div className="flex min-h-screen w-full flex-row items-center text-center -lg:flex-col -lg:pt-32">
@@ -53,7 +53,7 @@ export default function Login({ providers }: { providers: AppProps }) {
             <div className="flex flex-1 justify-end">
               {/* <img
                 src="/common/image/girl.png"
-                alt="PlayDate avatar"
+                alt="Chatti avatar"
                 className="h-full"
               /> */}
               <video

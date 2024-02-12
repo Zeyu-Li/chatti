@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
       <div className="m-auto flex h-full w-full max-w-6xl flex-row justify-between py-8">
         <p>
           {/* copyright */}
-          <span className="text-2xl">© PlayDate</span>
+          <span className="text-2xl">© Chatti</span>
         </p>
         <Link
           href="/login"

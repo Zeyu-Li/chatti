@@ -6,7 +6,7 @@ const TryIt: React.FC = () => {
   return (
     <div id="try" className="w-full text-center text-textPrimary">
       <div className="m-auto flex h-full w-full max-w-6xl flex-col items-center justify-center py-16 font-semibold -lg:px-8">
-        <h2 className="text-7xl">Talk to your Date</h2>
+        <h2 className="text-7xl">Talk to your AI Buddy</h2>
         <span className="inline pb-12">
           <p className="inline text-8xl"> </p>
           <ScrollAnimation animateIn="grow-in-text-size" className="inline">

@@ -7,7 +7,7 @@ import Title from "../components/SEO/Title";
 const Custom404: NextPage = () => {
   return (
     <>
-      <Title title="PlayDate | Lost in Action" />
+      <Title title="Chatti | Lost in Action" />
       <Header />
       <main className="flex min-h-screen flex-col items-center justify-center bg-primary">
         <div className="w-full max-w-6xl  -lg:px-8">
@@ -20,7 +20,7 @@ const Custom404: NextPage = () => {
               </div>
               <div>
                 <h2 className="py-8 text-4xl font-bold text-textPrimary/90">
-                  Come back 🥺
+                  Turn back now!
                 </h2>
               </div>
               <div>
@@ -34,7 +34,7 @@ const Custom404: NextPage = () => {
             <div className="flex flex-1 justify-end">
               <img
                 src="/common/image/girl.png"
-                alt="PlayDate avatar"
+                alt="Chatti avatar"
                 className="h-full"
               />
             </div>

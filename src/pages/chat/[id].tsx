@@ -105,7 +105,7 @@ export default function ChatSession() {
   return (
     <>
       <Header session={sessionData} />
-      <Title title="PlayDate | Chatting with Kali" />
+      <Title title="Chatti | Chatting with Kali" />
       <main className="flex min-h-screen flex-col bg-primary p-4 pt-12">
         <div className="m-auto w-full max-w-6xl text-textPrimary">
           <div className="flex h-full w-full items-end justify-between px-2 pt-16 font-semibold -lg:pt-8">

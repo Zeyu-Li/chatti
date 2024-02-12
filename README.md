@@ -1,16 +1,12 @@
-# PlayDate
+# Chatti
 
-Talk to your PlayDate now
+Talk to your AI Companion now
 
 ## Demo
 
+## UML
 
-
-https://github.com/Zeyu-Li/playdate/assets/34993025/9504d71f-8a70-42a9-9ec8-e35d5f9952ed
-
-
-
-----
+![uml](./assets/uml.png)
 
 # Create T3 App
 

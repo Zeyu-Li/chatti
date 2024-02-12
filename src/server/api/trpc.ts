@@ -185,6 +185,7 @@ const enforceUserIsSubscribed = t.middleware(async ({ ctx, next }) => {
     });
   }
 
+  console.log(user);
   // check if user is subscribed
   if (!user?.isSubscribed) {
     throw new TRPCError({
