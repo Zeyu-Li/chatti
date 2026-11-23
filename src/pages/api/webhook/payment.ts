@@ -1,6 +1,7 @@
 import { buffer } from "micro";
 import type { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
+import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
 import { stripe } from "~/server/stripe/client";
 
@@ -20,11 +21,9 @@ const subscription = async (req: NextApiRequest, res: NextApiResponse) => {
   const sig = req.headers["stripe-signature"];
   const buf = await buffer(req);
 
-  // The library needs to be configured with your account's secret key.
-  // Ensure the key is kept out of any version control system you might be using.
-
-  // This is your Stripe CLI webhook secret for testing your endpoint locally.
-  const endpointSecret = "whsec_DVArRQjSbA5STsYX0yr7xUDFbl8FbcWh";
+  // Signing secret of this webhook endpoint (Stripe dashboard, or `stripe listen` locally).
+  // It must stay out of version control: anyone who has it can forge payment events.
+  const endpointSecret = env.STRIPE_WEBHOOK_SECRET;
 
   let event: Stripe.Event;
   try {

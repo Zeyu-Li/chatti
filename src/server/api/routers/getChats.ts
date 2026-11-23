@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import {
   createTRPCRouter,
@@ -5,8 +6,27 @@ import {
   protectedProcedure,
   subscribedProcedure,
 } from "~/server/api/trpc";
+import { type prisma } from "~/server/db";
 
 import { fuzzy } from "fast-fuzzy";
+
+/**
+ * Throws NOT_FOUND unless the chat exists and belongs to the user, so one user can't read or write
+ * another user's chat by guessing or reusing its id.
+ */
+const assertOwnsChat = async (
+  db: typeof prisma,
+  chatId: string,
+  userId: string
+): Promise<void> => {
+  const chat = await db.chatSession.findFirst({
+    where: { id: chatId, userId },
+    select: { id: true },
+  });
+  if (!chat) {
+    throw new TRPCError({ code: "NOT_FOUND", message: "Chat not found" });
+  }
+};
 
 export const getChats = createTRPCRouter({
   // hello: publicProcedure
@@ -44,7 +64,8 @@ export const getChats = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
-      const id = ctx.session.user.id;
+      await assertOwnsChat(ctx.prisma, input.chatId, ctx.session.user.id);
+
       // return all messages from ChatSession with id
       try {
         const ChatSession = await ctx.prisma.message.findMany({
@@ -68,19 +89,7 @@ export const getChats = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      let ChatSession;
-
-      // get ChatSession with id and append message to messages
-      try {
-        ChatSession = await ctx.prisma.chatSession.findUnique({
-          where: {
-            id: input.chatId,
-          },
-        });
-      } catch (err) {
-        console.error("Couldn't find chat session: ", err);
-        return [];
-      }
+      await assertOwnsChat(ctx.prisma, input.chatId, ctx.session.user.id);
 
       // removed previous chatgpt and converted to mocked responses
       // complex decision tree for return message
@@ -119,8 +128,8 @@ export const getChats = createTRPCRouter({
       }
 
       if (!did_respond) {
-        for (let i = 0; i < heyWords.length; i++) {
-          if (response.includes(heyWords[i])) {
+        for (const heyWord of heyWords) {
+          if (response.includes(heyWord)) {
             messageResponse = "Hello!";
             did_respond = true;
             break;

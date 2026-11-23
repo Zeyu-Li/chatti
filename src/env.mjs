@@ -29,6 +29,7 @@ export const env = createEnv({
 
     STRIPE_PUBLIC_KEY: z.string(),
     STRIPE_SECRET_KEY: z.string(),
+    STRIPE_WEBHOOK_SECRET: z.string().startsWith("whsec_"),
   },
 
   /**
@@ -56,6 +57,7 @@ export const env = createEnv({
     STRIPE_LIVE_URL_YEARLY: process.env.STRIPE_LIVE_URL_YEARLY,
     STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
